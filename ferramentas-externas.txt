@@ -1,0 +1,5 @@
+ferramenta para converter de SVG para um componente 'tsx':
+    https://svg2jsx.com/
+
+ferramenta usada na procura de fontes para o projeto:
+    https://fonts.google.com/
