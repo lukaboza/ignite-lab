@@ -3,3 +3,6 @@ ferramenta para converter de SVG para um componente 'tsx':
 
 ferramenta usada na procura de fontes para o projeto:
     https://fonts.google.com/
+
+biblioteca de icones (figma e react):
+    https://phosphoricons.com/
