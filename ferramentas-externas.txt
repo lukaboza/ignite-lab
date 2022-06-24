@@ -6,3 +6,9 @@ ferramenta usada na procura de fontes para o projeto:
 
 biblioteca de icones (figma e react):
     https://phosphoricons.com/
+
+biblioteca de video custum:
+    https://vimejs.com/
+
+biblioteca de controle de rotas do react:
+    npm i react-router-dom
