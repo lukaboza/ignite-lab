@@ -2,48 +2,20 @@ import { DefaultUi, Player, Youtube } from "@vime/react";
 import { CaretRight, DiscordLogo, FileArrowDown, Lightning } from "phosphor-react";
 
 import '@vime/core/themes/default.css'; /* importa o play, pause, tela cheia, config do video (padrão do youtube) */
-import { gql, useQuery } from "@apollo/client";
-
-const GET_LESSONS_BY_SLUG_QUERY_ = gql`
-query GetLessonBySlug ($slug: String) {
-  lesson(where: {slug: $slug}) {
-    description
-    videoId
-    description
-    teacher {
-      bio
-      avatarURL
-      name
-    }
-  }
-}
-`
-
-interface GetLessonsBySlugQueryResponse {
-    lesson: {
-        title: string
-        videoId: string
-        description: string
-        teacher: {
-            name: string
-            bio: string
-            avatarURL: string
-        }
-    }
-}
+import { useGetLessonBySlugQuery } from "../graphql/generated";
 
 interface VideoProps {
     lessonSlug: string;
 }
 
 export function Video(props: VideoProps) {
-const { data } = useQuery<GetLessonsBySlugQueryResponse>(GET_LESSONS_BY_SLUG_QUERY_, {
+const { data } = useGetLessonBySlugQuery ({
     variables: {
         slug: props.lessonSlug,
     }
 })
 
-    if (!data) {
+    if (!data || !data.lesson) {
         return <div className="flex-1">
             <p>Loading...</p>
         </div>
@@ -64,17 +36,18 @@ const { data } = useQuery<GetLessonsBySlugQueryResponse>(GET_LESSONS_BY_SLUG_QUE
                 <div className="flex items-start gap-16">
                     <div className="flex-1">
                         <h1 className="text-2xl font-bold">
-                        {data.lesson.title}
+                            {data.lesson.__typename}
                         </h1>
                         <p className="mt-4 text-grey-200 leading-relaxed">
-                        {data.lesson.description}
+                            {data.lesson.description}
                         </p>
 
-                        <div className="flex items-center gap-4 mt-6">
-                            <img 
-                            className="h-16 w-16 rounded-full border-2 border-blue-500"
-                            src={data.lesson.teacher.avatarURL} 
-                            alt=""
+                        {data.lesson.teacher && (
+                            <div className="flex items-center gap-4 mt-6">
+                                <img 
+                                className="h-16 w-16 rounded-full border-2 border-blue-500"
+                                src={data.lesson.teacher.avatarURL} 
+                                alt=""
                             />
 
                             <div className="leading-relaxed">
@@ -82,6 +55,7 @@ const { data } = useQuery<GetLessonsBySlugQueryResponse>(GET_LESSONS_BY_SLUG_QUE
                                 <span className="text-gray-200 text-sm block" >{data.lesson.teacher.bio}</span>
                             </div>
                         </div>
+                        )}
                     </div>
 
                     <div className="flex flex-col gap-4">

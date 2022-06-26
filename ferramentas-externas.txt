@@ -10,5 +10,8 @@ biblioteca de icones (figma e react):
 biblioteca de video custum:
     https://vimejs.com/
 
+aprimoramento da sql do grapql:
+    https://www.graphql-code-generator.com/
+
 biblioteca de controle de rotas do react:
     npm i react-router-dom
