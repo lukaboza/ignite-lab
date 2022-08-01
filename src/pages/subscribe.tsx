@@ -45,7 +45,7 @@ async function handleSubscribe(event: FormEvent) {
                     <form onSubmit={handleSubscribe} className="flex flex-col gap-2 w-full">
                         <input
                         className="bg-gray-900 rounded px-5 h-14"
-                        type="text" 
+                        type="text"
                         placeholder="Seu Nome Completo" 
                         onChange={event => setName(event.target.value)}
                         />
